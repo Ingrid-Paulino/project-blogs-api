@@ -9,7 +9,6 @@ const userValidate = (req, _res, next) => {
 
   if (error) throw validateError(400, error.details[0].message);
   
-
   next();
 };
 
