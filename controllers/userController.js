@@ -1,15 +1,18 @@
 const userService = require('../services/userService');
-const { userValidate } = require('../middlewares/userValidation');
 
-const create = async (req, res, _next) => {
-  // const { displayName, email, password, image } = req.body;
+const { createToken } = require('../services/createToken');
 
-  const newUser = await userService.create(req.body);
-  await userValidate(req.body);
-
-  // if ('status' in newUser) return next(newUser);
-
-  return res.status(201).json(newUser);
+const create = async (req, res, next) => {
+  try {
+    const { email } = req.body;
+  const token = createToken(email);
+  // console.log({ token });
+  await userService.create(req.body);
+  
+  return res.status(201).json({ token });
+  } catch (error) {
+    next(error);
+  }
 };
 
 module.exports = {

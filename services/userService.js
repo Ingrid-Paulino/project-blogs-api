@@ -1,15 +1,16 @@
-const { UserModel } = require('../models');
+const { User } = require('../models');
+
+const { validateError } = require('../utils');
 
 const create = async (reqBodyUser) => {
-  // const { displayName, email, password, image } = reqBodyUser;
+  const { email } = reqBodyUser;
 
-  const newUser = await UserModel.create(reqBodyUser);
+  const emailUser = await User.findOne({ where: { email } });
+  if (emailUser) throw validateError(409, 'User already registered');
 
-  const { password: _, ...userCreated } = newUser.dataValues;
+  const response = await User.create(reqBodyUser);
 
-  console.log(userCreated);
-
-  return newUser;
+  return response;
 };
 
 module.exports = { create };

@@ -1,5 +1,5 @@
  const errorMiddlewate = (err, _req, res, _next) => {
-   console.error(err);
+   console.error('err', err);
 
     if (err.status) {
       return res.status(err.status).json({ message: err.message });

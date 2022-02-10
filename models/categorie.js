@@ -12,10 +12,10 @@ module.exports = (sequelize, DataTypes) => {
   // belongsTo -> pertence a um
   // belongsMany -> pertence a vários
 
-  Categorie.associate = (models) => {
-    Categorie.hasMany(models.PostsCategorie, {
-      foreignkey: 'category_id', as: 'postsCategorie' });
-  };
+  // Categorie.associate = (models) => {
+  //   Categorie.hasMany(models.PostsCategorie, {
+  //     foreignkey: 'category_id', as: 'postsCategorie' });
+  // };
 
   return Categorie;
 };
