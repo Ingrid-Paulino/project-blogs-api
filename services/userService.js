@@ -1,5 +1,4 @@
 const { User } = require('../models');
-
 const { validateError } = require('../utils');
 
 const create = async (reqBodyUser) => {

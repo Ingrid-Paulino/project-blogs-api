@@ -16,6 +16,8 @@ module.exports = async (req, res, next) => {
     
     req.ingrid = decoded.data;
 
+    console.log('req', req);
+
     next();
   } catch (err) {
     return res.status(401).json({ message: err.message });

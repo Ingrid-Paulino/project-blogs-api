@@ -7,4 +7,12 @@ const UserSchema = Joi.object({
   image: Joi.string(),
 });
 
-module.exports = UserSchema;
+const LoginSchema = Joi.object({
+  email: Joi.string().email().required(),
+  password: Joi.string().length(6).required(),
+});
+
+module.exports = {
+  UserSchema,
+  LoginSchema,
+};

@@ -1,13 +1,15 @@
-// const userValidate = (req, res, next) => {
-//     const { email, password } = req.body;
+const { validateError } = require('../utils');
+const Schema = require('../schemas/userSchema');
 
-//     if (!email || !password) {
-//         return res.status(401).json({
-//           message: 'É necessário usuário e senha para fazer login',
-//         });
-//       }
+const loginValidate = (req, res, next) => {
+      const { email, password } = req.body;
+      // validar o usúario
+      // Para nn ter que escrever sempre validateUser.error, distruturei error.
+      const { error } = Schema.LoginSchema.validate({ email, password });
     
-//     next();
-// };
-
-// module.exports = { userValidate };
+      if (error) throw validateError(400, error.details[0].message);
+      
+      next();
+    };
+    
+    module.exports = { loginValidate };

@@ -1,14 +1,10 @@
-// const express = require('express');
-// const loginValidate = require('../middlewares/loginValidate');
+const express = require('express');
 
-// // const validateJWT = require('../auth/validateJWT');
+const loginRoute = express.Router({ mergeParams: true });
 
-// const loginRoute = express.Router({ mergeParams: true });
+const loginValidate = require('../middlewares/loginValidate');
+const loginController = require('../controllers/loginController');
 
-// const loginController = require('../controllers/userController');
+loginRoute.post('/', loginValidate.loginValidate, loginController.create);
 
-// // loginRoute.get('/posts', validateJWT, routes.getPosts);
-
-// loginRoute.post('/', loginValidate.userValidate, loginController.create);
-
-// module.exports = loginRoute;
+module.exports = loginRoute;
