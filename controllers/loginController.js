@@ -1,13 +1,11 @@
-const { createToken } = require('../services/createToken');
 const loginService = require('../services/loginService');
 
 const create = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
-    const token = createToken(email);
-
-    await loginService.create({ email, password });
+    const token = await loginService.create({ email, password });
+    console.log('aa', { token });
 
     return res.status(200).json({ token });
 } catch (error) {
