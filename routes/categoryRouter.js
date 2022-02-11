@@ -7,5 +7,6 @@ const categoryController = require('../controllers/categoryController');
 
 categoryRoute.use(validateJWT);
 categoryRoute.post('/', categoryController.create);
+categoryRoute.get('/', categoryController.getAll);
 
 module.exports = categoryRoute;

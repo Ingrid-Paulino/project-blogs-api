@@ -10,6 +10,9 @@ const create = async (name) => {
     return category;
 };
 
+const getAll = async () => Categorie.findAll({ attributes: { exclude: 'password' } });
+
 module.exports = {
     create,
+    getAll,
 };

@@ -12,4 +12,14 @@ const create = async (req, res, next) => {
     }
 };
 
-module.exports = { create };
+const getAll = async (req, res, next) => {
+    try {
+      const response = await categoryService.getAll();
+  
+      return res.status(200).json(response);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+module.exports = { create, getAll };

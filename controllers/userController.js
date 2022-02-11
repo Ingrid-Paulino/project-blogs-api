@@ -5,11 +5,11 @@ const { createToken } = require('../services/createToken');
 const create = async (req, res, next) => {
   try {
     const { email } = req.body;
-  const token = createToken(email);
-  // console.log({ token });
-  await userService.create(req.body);
-  
-  return res.status(201).json({ token });
+    const token = createToken(email);
+    // console.log({ token });
+    await userService.create(req.body);
+
+    return res.status(201).json({ token });
   } catch (error) {
     next(error);
   }
@@ -17,9 +17,9 @@ const create = async (req, res, next) => {
 
 const getAll = async (req, res, next) => {
   try {
-  const response = await userService.getAll();
-  
-  return res.status(200).json(response);
+    const response = await userService.getAll();
+
+    return res.status(200).json(response);
   } catch (error) {
     next(error);
   }
@@ -29,8 +29,6 @@ const getUserId = async (req, res, next) => {
   try {
     const { id } = req.params;
     const response = await userService.getUserId(id);
-
-    // if (!response)
 
     return res.status(200).json(response);
   } catch (error) {
