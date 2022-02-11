@@ -5,14 +5,13 @@ const jwt = require('jsonwebtoken');
 // chave secreta --> armazena-la numa variável de ambiente depois
 const SECRET = 'seusecretdetoken';
 
-const jwtConfig = {
+const createToken = (email) => {
+  const jwtConfig = {
     expiresIn: '7d',
     algorithm: 'HS256',
-};
+  };
 
-const createToken = (email) => {
     const token = jwt.sign({ data: email }, SECRET, jwtConfig);
-    // console.log(token);
 
     return token;
   };

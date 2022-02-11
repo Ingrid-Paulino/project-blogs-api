@@ -12,4 +12,6 @@ const create = async (reqBodyUser) => {
   return response;
 };
 
-module.exports = { create };
+const getAll = async () => User.findAll();
+
+module.exports = { create, getAll };

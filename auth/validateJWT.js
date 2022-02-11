@@ -14,10 +14,10 @@ module.exports = async (req, res, next) => {
     /* Através o método verify, podemos validar e decodificar o nosso JWT. */
     const decoded = jwt.verify(token, segredo);
     
-    req.ingrid = decoded.data;
+    req.email = decoded.data;
 
     console.log('req', req);
-
+    
     next();
   } catch (err) {
     return res.status(401).json({ message: err.message });

@@ -3,17 +3,15 @@ const loginService = require('../services/loginService');
 
 const create = async (req, res, next) => {
   try {
-    const { email } = req.body;
-    console.log('c', { email });
-    const token = createToken(email);
-    console.log({ token });
+    const { email, password } = req.body;
 
-    await loginService.create(req.body);
+    const token = createToken(email);
+
+    await loginService.create({ email, password });
 
     return res.status(200).json({ token });
 } catch (error) {
   console.log({ error });
-
     next(error);
 }
 };

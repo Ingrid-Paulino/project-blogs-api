@@ -1,17 +1,14 @@
 const { User } = require('../models');
 const { validateError } = require('../utils');
 
-const create = async (reqBodyLogin) => {
-    const { email } = reqBodyLogin;
-    console.log({ email });
-    const emailUser = await User.findOne({ where: { email } });
-    console.log('a', { emailUser });
+const create = async ({ email, password }) => {
+    const foundUser = await User.findOne({ where: { email, password } });
 
-    if (!emailUser) throw validateError(400, 'Invalid fields');
-    console.log('b', { emailUser });
+    if (!foundUser) {
+      throw validateError(400, 'Invalid fields'); 
+    } 
 
-    const response = await User.create(reqBodyLogin);
-    console.log({ response });
+    const response = await User.create(email, password);
 
     return response;
 };
