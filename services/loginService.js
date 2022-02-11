@@ -13,8 +13,6 @@ const create = async ({ email, password }) => {
 
     const token = createToken(email);
 
-    console.log({ token });
-
     return token;
 };
 

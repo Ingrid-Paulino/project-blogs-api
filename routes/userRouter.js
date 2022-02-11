@@ -1,13 +1,15 @@
 const express = require('express');
 
 const userRoute = express.Router({ mergeParams: true });
+const validateJWT = require('../middlewares/auth/validateJWT');
 
 const userValidacao = require('../middlewares/userValidation');
-const loginValidate = require('../middlewares/loginValidate');
+// const tokenValidate = require('../middlewares/tokenValidate');
 const userController = require('../controllers/userController');
 
 userRoute.post('/', userValidacao.userValidate, userController.create);
 
-userRoute.get('/', loginValidate.loginValidate, userController.getAll);
+userRoute.get('/', validateJWT, userController.getAll);
+userRoute.get('/:id', validateJWT, userController.getUserId);
 
 module.exports = userRoute;

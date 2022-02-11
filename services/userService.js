@@ -12,6 +12,12 @@ const create = async (reqBodyUser) => {
   return response;
 };
 
-const getAll = async () => User.findAll();
+const getAll = async () => User.findAll({ attributes: { exclude: 'password' } });
 
-module.exports = { create, getAll };
+const getUserId = async (id) => {
+    const user = await User.findByPk(id, { attributes: { exclude: 'password' } });
+
+    return user;
+};
+
+module.exports = { create, getAll, getUserId };

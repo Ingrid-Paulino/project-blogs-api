@@ -5,7 +5,6 @@ const create = async (req, res, next) => {
     const { email, password } = req.body;
 
     const token = await loginService.create({ email, password });
-    console.log('aa', { token });
 
     return res.status(200).json({ token });
 } catch (error) {

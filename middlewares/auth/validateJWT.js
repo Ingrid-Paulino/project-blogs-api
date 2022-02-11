@@ -7,9 +7,10 @@ const SEGREDO = 'seusecretdetoken';
 module.exports = async (req, res, next) => {
   const token = req.headers.authorization;
   // ou
+  // const { authorization } = req.headers;
 
   if (!token) {
-    return res.status(401).json({ error: 'Token não encontrado' });
+    return res.status(401).json({ message: 'Token not found' });
   }
 
   try {
@@ -20,8 +21,8 @@ module.exports = async (req, res, next) => {
 
     if (!user) {
       return res
-        .status(401)
-        .json({ message: 'Erro ao procurar usuário do token.' });
+        .status(404)
+        .json({ message: 'User does not exist' });
     }
     
     // req.email = decoded.data;
@@ -32,6 +33,6 @@ module.exports = async (req, res, next) => {
     
     next();
   } catch (err) {
-    return res.status(401).json({ message: err.message });
+    return res.status(401).json({ message: 'Expired or invalid token' });
   }
 };
