@@ -20,9 +20,7 @@ module.exports = async (req, res, next) => {
     const user = await User.findOne({ email: decoded.data.email });
 
     if (!user) {
-      return res
-        .status(404)
-        .json({ message: 'User does not exist' });
+      return res.status(404).json({ message: 'User does not exist' });
     }
     
     // req.email = decoded.data;

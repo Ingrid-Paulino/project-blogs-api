@@ -30,6 +30,8 @@ const getUserId = async (req, res, next) => {
     const { id } = req.params;
     const response = await userService.getUserId(id);
 
+    // if (!response)
+
     return res.status(200).json(response);
   } catch (error) {
     next(error);
