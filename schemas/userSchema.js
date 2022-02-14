@@ -12,10 +12,14 @@ const LoginSchema = Joi.object({
   password: Joi.string().length(6).required(),
 });
 
-const TokenSchema = Joi.string().token();
+const BlogPostSchema = Joi.object({
+  title: Joi.string().required(),
+  content: Joi.string().required(),
+  categoryIds: Joi.array().items(Joi.number()).required(),
+});
 
 module.exports = {
   UserSchema,
   LoginSchema,
-  TokenSchema,
+  BlogPostSchema,
 };

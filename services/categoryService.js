@@ -6,7 +6,7 @@ const create = async (name) => {
 
     const category = await Categorie.create({ name });
 
-    // console.log('category', category);
+    console.log('category', category);
     return category;
 };
 
