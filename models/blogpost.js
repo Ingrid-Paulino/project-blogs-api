@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     content: DataTypes.STRING,
     userId: { type: DataTypes.INTEGER },
-  }, { timestamps: true, tableName: 'BlogPosts', createdAt: 'published', updatedAt: 'updated' }); 
+  }, { tableName: 'BlogPosts', createdAt: 'published', updatedAt: 'updated' }); 
 
   // hasOne -> possui um
   // belongsTo -> pertence a um
@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
 
   BlogPost.associate = (models) => {
     BlogPost.belongsTo(models.User, {
-      foreignkey: 'userId', as: 'users' });
+      foreignkey: 'userId', as: 'user' });
   };
 
   return BlogPost;

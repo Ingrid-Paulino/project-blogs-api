@@ -1,16 +1,5 @@
 const blogPostService = require('../services/blogPostService');
 
-// const create = async (req, res, next) => {
-//     try {
-//       const response = await blogPostService.create(req.body, req.user);
-
-//       const { id, title, content, userId } = response;
-//       return res.status(201).json({ id, title, content, userId });
-//     } catch (error) {
-//         next(error);
-//     }
-// };
-
 const create = async (req, res, next) => {
   try {
     const response = await blogPostService.create(req.body, req.user);
