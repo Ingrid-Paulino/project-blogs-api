@@ -24,9 +24,9 @@ const getById = async (id) => {
     const blogPost = await BlogPost.findOne({
         where: { id },
         include: [
-          { model: User, as: 'user', attributes: { exclude: ['password'] } },
-          { model: Categorie, as: 'categories' },
-      ],
+        { model: User, as: 'user', attributes: { exclude: ['password'] } },
+        { model: Categorie, as: 'categories', through: { attributes: [] } },
+    ],
    });
 
    if (!blogPost) throw validateError(404, 'Post does not exist');

@@ -12,6 +12,6 @@ blogPostRoute.use(validateJWT);
 
 blogPostRoute.post('/', blogPostsValidate, validatePostCategory, blogPostController.create);
 blogPostRoute.get('/', blogPostController.getAll);
-// blogPostRoute.get('/:id', blogPostsValidate, validatePostCategory, blogPostController.getById);
+blogPostRoute.get('/:id', blogPostController.getById);
 
 module.exports = blogPostRoute;
