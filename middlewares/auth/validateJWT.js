@@ -16,8 +16,10 @@ module.exports = async (req, res, next) => {
   try {
     /* Através o método verify, podemos validar e decodificar o nosso JWT. */
     const decoded = jwt.verify(token, SEGREDO);
+    // console.log('decoded', decoded);
 
-    const user = await User.findOne({ email: decoded.data.email });
+    const user = await User.findOne({ where: { email: decoded.data } });
+    // console.log('decoded', user);
 
     if (!user) {
       return res.status(404).json({ message: 'User does not exist' });

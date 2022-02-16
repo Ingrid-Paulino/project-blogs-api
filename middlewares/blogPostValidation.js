@@ -18,17 +18,28 @@ const validatePostCategory = async (req, _res, next) => {
   const { categoryIds } = req.body;
 
   const alreadyExists = await Categorie.findAll({ where: { id: categoryIds } });
-  console.log('alreadyExists', alreadyExists);
+  // console.log('alreadyExists', alreadyExists);
 
   if (alreadyExists.length !== categoryIds.length) {
-    console.log('gggggg');
+    // console.log('gggggg');
     next(validateError(400, '"categoryIds" not found'));
   }
 
   next();
 };
 
+const validateUpdateBlogPost = (req, res, next) => {
+  const { title, content } = req.body;
+ 
+  const { error } = Schema.BlogPostSchemaUpdate.validate({ title, content });
+
+  if (error) throw validateError(400, error.details[0].message);
+  
+  next();
+};
+
 module.exports = {
   blogPostsValidate,
   validatePostCategory,
+  validateUpdateBlogPost,
 };

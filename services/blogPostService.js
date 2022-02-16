@@ -4,6 +4,7 @@ const { validateError } = require('../utils');
 const create = async (reqBodyBlogPost, reqUser) => {
   const { title, content } = reqBodyBlogPost;
   const { id } = reqUser;
+  console.log({ id });
   
     const data = await BlogPost.create({ title, content, userId: id });
     return data;
@@ -34,4 +35,39 @@ const getById = async (id) => {
    return blogPost;
   };
 
-module.exports = { create, getAll, getById };
+const update = async ({ title, content, categoryIds }, id, idUser) => {
+  const idUserLogado = await getById(id);
+
+  if (idUser !== idUserLogado.user.id) throw validateError(401, 'Unauthorized user');
+  if (categoryIds) throw validateError(400, 'Categories cannot be edited');
+
+  await BlogPost.update(
+    { title, content },
+    { where: { id } },
+  );
+
+  const blogPost = await BlogPost.findOne({
+    where: { id },
+    include: [
+    { model: Categorie, as: 'categories', through: { attributes: [] } },
+],
+});
+
+  return blogPost;
+};
+
+const deleteBlogPost = async (id) => {
+  const deleteUser = await User.destroy(
+    { where: { id } },
+  );
+
+  return deleteUser;
+};
+
+module.exports = {
+  create,
+  getAll,
+  getById,
+  update,
+  deleteBlogPost,
+};
