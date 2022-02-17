@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const { BlogPost, User, Categorie } = require('../models');
 const { validateError } = require('../utils');
 
@@ -70,10 +71,29 @@ const deleteBlogPost = async (id, idUser) => {
   return deleteUser;
 };
 
+const searchPost = async (query) => {
+  // fonte: https://github.com/sequelize/sequelize/issues/3095
+  const filteredPosts = await BlogPost.findAll({
+    where: {
+      [Op.or]: [
+        { title: { [Op.like]: `%${query}%` } },
+        { content: { [Op.like]: `%${query}%` } },
+      ],
+    },
+    include: [
+      { model: User, as: 'user', attributes: { exclude: ['password'] } },
+      { model: Categorie, as: 'categories', through: { attributes: [] } },
+    ],
+  });
+  
+  return filteredPosts || [];
+};
+
 module.exports = {
   create,
   getAll,
   getById,
   update,
   deleteBlogPost,
+  searchPost,
 };

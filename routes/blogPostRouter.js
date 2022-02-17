@@ -15,8 +15,10 @@ const blogPostController = require('../controllers/blogPostController');
 blogPostRoute.use(validateJWT);
 
 blogPostRoute.post('/', blogPostsValidate, validatePostCategory, blogPostController.create);
-blogPostRoute.get('/', blogPostController.getAll);
+blogPostRoute.get('/search', blogPostController.searchPost);
 blogPostRoute.get('/:id', blogPostController.getById);
+blogPostRoute.get('/', blogPostController.getAll);
+
 blogPostRoute.put('/:id', validateUpdateBlogPost, blogPostController.update);
 blogPostRoute.delete('/:id', blogPostController.deleteBlogPost);
 
