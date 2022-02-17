@@ -41,7 +41,7 @@ const update = async (req, res, next) => {
   // console.log({ title, content });
   // console.log({ id });
   // console.log('req', req.body);
-  console.log('reqUser', req.user, idUser);
+  // console.log('reqUser', req.user, idUser);
 
   try {
     const response = await blogPostService.update({ title, content, categoryIds }, id, idUser);
@@ -55,9 +55,10 @@ const update = async (req, res, next) => {
 
 const deleteBlogPost = async (req, res, next) => {
   const { id } = req.params;
+  const { dataValues: { id: idUser } } = req.user;
+
   try {
-    await blogPostService.delete(id);
-    // console.log({ response });
+    await blogPostService.deleteBlogPost(id, idUser);
 
     return res.status(204).end();
   } catch (error) {

@@ -56,10 +56,16 @@ const update = async ({ title, content, categoryIds }, id, idUser) => {
   return blogPost;
 };
 
-const deleteBlogPost = async (id) => {
-  const deleteUser = await User.destroy(
+const deleteBlogPost = async (id, idUser) => {
+  const idUserLogado = await getById(id);
+  console.log({ idUserLogado });
+  if (idUser !== idUserLogado.user.id) throw validateError(401, 'Unauthorized user');
+
+  const deleteUser = await BlogPost.destroy(
     { where: { id } },
   );
+
+  console.log({ deleteUser });
 
   return deleteUser;
 };
