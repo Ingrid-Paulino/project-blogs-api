@@ -22,4 +22,10 @@ const getUserId = async (id) => {
     return user;
 };
 
-module.exports = { create, getAll, getUserId };
+const apagarUsuario = async (id) => {
+  console.log({ id });
+    await User.destroy({ where: { id } });
+    return id;
+};
+
+module.exports = { create, getAll, getUserId, apagarUsuario };

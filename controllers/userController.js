@@ -36,8 +36,22 @@ const getUserId = async (req, res, next) => {
   }
 };
 
+const apagarUsuario = async (req, res, next) => {
+  const userId = req.user.id;
+  // console.log({ userId });
+
+  try {
+    await userService.apagarUsuario(userId);
+
+    return res.status(204).end();
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   create,
   getAll,
   getUserId,
+  apagarUsuario,
 };
