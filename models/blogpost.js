@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false },
     title: DataTypes.STRING,
     content: DataTypes.STRING,
-    userId: { type: DataTypes.INTEGER },
+    // userId: { type: DataTypes.INTEGER },
   }, { tableName: 'BlogPosts', createdAt: 'published', updatedAt: 'updated' }); 
 
   // hasOne -> possui um

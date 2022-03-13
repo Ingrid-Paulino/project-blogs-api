@@ -37,11 +37,6 @@ const update = async (req, res, next) => {
   const { title, content, categoryIds } = req.body;
   const { id } = req.params;
   const { dataValues: { id: idUser } } = req.user;
-  
-  // console.log({ title, content });
-  // console.log({ id });
-  // console.log('req', req.body);
-  // console.log('reqUser', req.user, idUser);
 
   try {
     const response = await blogPostService.update({ title, content, categoryIds }, id, idUser);
