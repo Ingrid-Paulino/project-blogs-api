@@ -7,15 +7,5 @@ module.exports = (sequelize, DataTypes) => {
       tableName: 'Categories',
     }); 
 
-  // hasOne -> possui um
-  // hasMany -> possui vários
-  // belongsTo -> pertence a um
-  // belongsToMany -> pertence a vários
-
-  // Categorie.associate = (models) => {
-  //   Categorie.hasMany(models.PostsCategorie, {
-  //     foreignkey: 'category_id', as: 'postsCategorie' });
-  // };
-
   return Categorie;
 };
