@@ -1,6 +1,6 @@
-const { Categorie } = require('../models');
+const { Categorie } = require('../../db/models');
 
-const { validateError } = require('../utils');
+const { validateError } = require('../../app/utils');
 const Schema = require('../schemas/userSchema');
 
 const blogPostsValidate = (req, _res, next) => {
