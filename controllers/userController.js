@@ -1,5 +1,4 @@
 const userService = require('../services/userService');
-
 const { createToken } = require('../services/createToken');
 
 const create = async (req, res, next) => {
