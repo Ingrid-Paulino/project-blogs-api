@@ -6,8 +6,8 @@ module.exports = {
   // 'blogs_api' ao final é o nome do meu banco
   // '123456' -> senha do banco
   // url: process.env.MYSQL_URI || "mysql://root:123456@localhost:3002/blogs_api",
-  "config": path.resolve('src', 'db', "config", "config.js"),
-  "models-path": path.resolve(__dirname, 'src', 'db', "models"),
+  config: path.resolve(__dirname, "dist", "src", "db", "config", "config.js"),
+  "models-path": path.resolve(__dirname, "dist", "src", "db", "models", "db_sequelize"),
   "seeders-path": path.resolve(basePath, "seeders"),
   "migrations-path": path.resolve(basePath, "migrations"),
 };

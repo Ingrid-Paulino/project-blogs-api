@@ -1,1 +1,3 @@
 1 - Transformar os ids e string
+2 - rever arquivo config e refatorar
+3- treansformar em private os atributos do model

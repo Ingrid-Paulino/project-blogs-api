@@ -1,0 +1,12 @@
+const express = require('express');
+
+const categoryRoute = express.Router({ mergeParams: true });
+const validateJWT = require('../middlewares/auth/validateJWT');
+
+const categoryController = require('../../app/controllers/categoryController');
+
+categoryRoute.use(validateJWT);
+categoryRoute.post('/', categoryController.create);
+categoryRoute.get('/', categoryController.getAll);
+
+module.exports = categoryRoute;

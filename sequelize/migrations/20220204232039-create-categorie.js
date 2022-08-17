@@ -11,7 +11,25 @@ module.exports = {
       name: {
         allowNull: false,
         type: Sequelize.STRING
-      }
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE(3),
+        field: 'created_at',
+        defaultValue: new Date(),
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE(3),
+        field: 'updated_at',
+        defaultValue: new Date(),
+      },
+      deletedAt: {
+        allowNull: false,
+        type: Sequelize.DATE(3),
+        field: 'deleted_at',
+        defaultValue: new Date(),
+      },
     });
   },
   
