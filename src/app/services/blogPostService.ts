@@ -1,101 +1,103 @@
-import { Op } from 'sequelize';
+// import { Op } from 'sequelize';
 
-import { BlogPost, User, Categorie } from '../../db/models';
-import { validateError } from '../utils';
+// import BlogPost from '../../db/models/blogpost';
+// import User from '../../db/models/user';
+// import Categorie from '../../db/models/categorie';
+// import { throwError } from '../helpers/thowError';
 
-const create = async (reqBodyBlogPost, reqUser) => {
-  const { title, content } = reqBodyBlogPost;
-  const { id } = reqUser;
-  console.log({ id });
+// const create = async (reqBodyBlogPost: any, reqUser: any) => {
+//   const { title, content } = reqBodyBlogPost;
+//   const { id } = reqUser;
+//   console.log({ id });
 
-  const data = await BlogPost.create({ title, content, userId: id });
-  return data;
-};
+//   const data = await BlogPost.create({ title, content, userId: id });
+//   return data;
+// };
 
-const getAll = async () => {
-  const blogPost = await BlogPost.findAll({
-    attributes: { exclude: ['UserId'] },
-    include: [
-      { model: User, as: 'user', attributes: { exclude: ['password'] } },
-      { model: Categorie, as: 'categories', through: { attributes: [] } },
-    ],
-  });
+// const getAll = async () => {
+//   const blogPost = await BlogPost.findAll({
+//     attributes: { exclude: ['UserId'] },
+//     include: [
+//       { model: User, as: 'user', attributes: { exclude: ['password'] } },
+//       { model: Categorie, as: 'categories', through: { attributes: [] } },
+//     ],
+//   });
 
-  return blogPost;
-};
+//   return blogPost;
+// };
 
-const getById = async (id) => {
-  const blogPost = await BlogPost.findOne({
-    where: { id },
-    include: [
-      { model: User, as: 'user', attributes: { exclude: ['password'] } },
-      { model: Categorie, as: 'categories', through: { attributes: [] } },
-    ],
-  });
+// const getById = async (id: number) => {
+//   const blogPost = await BlogPost.findOne({
+//     where: { id },
+//     include: [
+//       { model: User, as: 'user', attributes: { exclude: ['password'] } },
+//       { model: Categorie, as: 'categories', through: { attributes: [] } },
+//     ],
+//   });
 
-  if (!blogPost) throw validateError(404, 'Post does not exist');
+//   if (!blogPost) throwError('Post does not exist/404');
 
-  return blogPost;
-};
+//   return blogPost;
+// };
 
-const update = async ({ title, content, categoryIds }, id, idUser) => {
-  const idUserLogado = await getById(id);
+// // const update = async ({ title, content, categoryIds }: any, id: number, idUser: number) => {
+// //   const idUserLogado = await getById(id);
 
-  if (idUser !== idUserLogado.user.id) throw validateError(401, 'Unauthorized user');
-  if (categoryIds) throw validateError(400, 'Categories cannot be edited');
+// //   if (idUser !== idUserLogado.user.id) throwError('Unauthorized user/401');
+// //   if (categoryIds) throwError('Categories cannot be edited/400');
 
-  await BlogPost.update(
-    { title, content },
-    { where: { id } },
-  );
+// //   await BlogPost.update(
+// //     { title, content },
+// //     { where: { id } },
+// //   );
 
-  const blogPost = await BlogPost.findOne({
-    where: { id },
-    include: [
-      { model: Categorie, as: 'categories', through: { attributes: [] } },
-    ],
-  });
+// //   const blogPost = await BlogPost.findOne({
+// //     where: { id },
+// //     include: [
+// //       { model: Categorie, as: 'categories', through: { attributes: [] } },
+// //     ],
+// //   });
 
-  return blogPost;
-};
+// //   return blogPost;
+// // };
 
-const deleteBlogPost = async (id, idUser) => {
-  const idUserLogado = await getById(id);
-  console.log({ idUserLogado });
-  if (idUser !== idUserLogado.user.id) throw validateError(401, 'Unauthorized user');
+// // const deleteBlogPost = async (id: number, idUser: number) => {
+// //   const idUserLogado = await getById(id);
+// //   console.log({ idUserLogado });
+// //   if (idUser !== idUserLogado.user.id) throwError('Unauthorized user/401');
 
-  const deleteUser = await BlogPost.destroy(
-    { where: { id } },
-  );
+// //   const deleteUser = await BlogPost.destroy(
+// //     { where: { id } },
+// //   );
 
-  console.log({ deleteUser });
+// //   console.log({ deleteUser });
 
-  return deleteUser;
-};
+// //   return deleteUser;
+// // };
 
-const searchPost = async (query) => {
-  // fonte: https://github.com/sequelize/sequelize/issues/3095
-  const filteredPosts = await BlogPost.findAll({
-    where: {
-      [Op.or]: [
-        { title: { [Op.like]: `%${query}%` } },
-        { content: { [Op.like]: `%${query}%` } },
-      ],
-    },
-    include: [
-      { model: User, as: 'user', attributes: { exclude: ['password'] } },
-      { model: Categorie, as: 'categories', through: { attributes: [] } },
-    ],
-  });
+// const searchPost = async (query: any) => {
+//   // fonte: https://github.com/sequelize/sequelize/issues/3095
+//   const filteredPosts = await BlogPost.findAll({
+//     where: {
+//       [Op.or]: [
+//         { title: { [Op.like]: `%${query}%` } },
+//         { content: { [Op.like]: `%${query}%` } },
+//       ],
+//     },
+//     include: [
+//       { model: User, as: 'user', attributes: { exclude: ['password'] } },
+//       { model: Categorie, as: 'categories', through: { attributes: [] } },
+//     ],
+//   });
 
-  return filteredPosts || [];
-};
+//   return filteredPosts || [];
+// };
 
-export {
-  create,
-  getAll,
-  getById,
-  update,
-  deleteBlogPost,
-  searchPost,
-};
+// export default {
+//   create,
+//   getAll,
+//   getById,
+//   // update,
+//   // deleteBlogPost,
+//   searchPost,
+// };

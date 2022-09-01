@@ -1,45 +1,47 @@
-import { Categorie } from '../../db/models';
+// import { NextFunction, Request, Response } from 'express';
+// import Categorie from '../../db/models/categorie';
 
-import { validateError } from '../../app/utils';
-import Schema from '../../app/schemas/userSchema';
+// import validateError from '../../app/utils';
+// import Schema from '../../app/schemas/userSchema';
+// import { throwError } from '../../app/helpers/thowError';
 
-const blogPostsValidate = (req, _res, next) => {
-  const { title, content, categoryIds } = req.body;
-  // validar o usúario
-  // Para nn ter que escrever sempre validateUser.error, distruturei error.
-  const { error } = Schema.BlogPostSchema.validate({ title, content, categoryIds });
+// const blogPostsValidate = (req: Request, res: Response, next: NextFunction) => {
+//   const { title, content, categoryIds } = req.body;
+//   // validar o usúario
+//   // Para nn ter que escrever sempre validateUser.error, distruturei error.
+//   const { error } = Schema.BlogPostSchema.validate({ title, content, categoryIds });
 
-  if (error) throw validateError(400, error.details[0].message);
+//   if (error) throwError('400', error.details[0].message);
   
-  next();
-};
+//   next();
+// };
 
-const validatePostCategory = async (req, _res, next) => {
-  const { categoryIds } = req.body;
+// const validatePostCategory = async (req: Request, res: Response, next: NextFunction) => {
+//   const { categoryIds } = req.body;
 
-  const alreadyExists = await Categorie.findAll({ where: { id: categoryIds } });
-  // console.log('alreadyExists', alreadyExists);
+//   const alreadyExists = await Categorie.findAll({ where: { id: categoryIds } });
+//   // console.log('alreadyExists', alreadyExists);
 
-  if (alreadyExists.length !== categoryIds.length) {
-    // console.log('gggggg');
-    next(validateError(400, '"categoryIds" not found'));
-  }
+//   if (alreadyExists.length !== categoryIds.length) {
+//     // console.log('gggggg');
+//     next(validateError(400, '"categoryIds" not found'));
+//   }
 
-  next();
-};
+//   next();
+// };
 
-const validateUpdateBlogPost = (req, res, next) => {
-  const { title, content } = req.body;
+// const validateUpdateBlogPost = (req: Request, res: Response, next: NextFunction) => {
+//   const { title, content } = req.body;
  
-  const { error } = Schema.BlogPostSchemaUpdate.validate({ title, content });
+//   const { error } = Schema.BlogPostSchemaUpdate.validate({ title, content });
 
-  if (error) throw validateError(400, error.details[0].message);
+//   if (error) throwError(`${error.details[0].message}/400`);
   
-  next();
-};
+//   next();
+// };
 
-export {
-  blogPostsValidate,
-  validatePostCategory,
-  validateUpdateBlogPost,
-};
+// export {
+//   blogPostsValidate,
+//   validatePostCategory,
+//   validateUpdateBlogPost,
+// };

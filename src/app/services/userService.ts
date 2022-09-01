@@ -1,31 +1,36 @@
-import { User } from '../../db/models';
-import { validateError } from '../utils';
+// import User from '../../db/models/user';
+// import { throwError } from '../helpers/thowError';
 
-const create = async (reqBodyUser) => {
-  const { email } = reqBodyUser;
+// const create = async (reqBodyUser: any) => {
+//   const { email } = reqBodyUser;
 
-  const emailUser = await User.findOne({ where: { email } });
-  if (emailUser) throw validateError(409, 'User already registered');
+//   const emailUser = await User.findOne({ where: { email } });
+//   if (emailUser) throwError('User already registered/409');
+//   console.log('oi', emailUser);
+  
+//   const response = await User.create(reqBodyUser);
 
-  const response = await User.create(reqBodyUser);
+//   return response;
+// };
 
-  return response;
-};
+// const getAll = async () => User.findAll({ 
+//   attributes: { 
+//     exclude: ['password'],
+//   },
+// });
 
-const getAll = async () => User.findAll({ attributes: { exclude: 'password' } });
+// const getUserId = async (id: number) => {
+//   const user = await User.findByPk(id, { attributes: { exclude: ['password'] } });
 
-const getUserId = async (id) => {
-    const user = await User.findByPk(id, { attributes: { exclude: 'password' } });
+//   if (!user) throwError('User does not exist/404');
 
-    if (!user) throw validateError(404, 'User does not exist');
+//   return user;
+// };
 
-    return user;
-};
+// const apagarUsuario = async (id: number) => {
+//   console.log({ id });
+//   await User.destroy({ where: { id } });
+//   return id;
+// };
 
-const apagarUsuario = async (id) => {
-  console.log({ id });
-    await User.destroy({ where: { id } });
-    return id;
-};
-
-export { create, getAll, getUserId, apagarUsuario };
+// export default { create, getAll, getUserId, apagarUsuario };

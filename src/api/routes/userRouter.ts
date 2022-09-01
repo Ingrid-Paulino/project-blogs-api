@@ -1,16 +1,16 @@
-const express = require('express');
+// import express from 'express';
+// import validateJWT from '../middlewares/auth/validateJWT';
 
-const userRoute = express.Router({ mergeParams: true });
-const validateJWT = require('../middlewares/auth/validateJWT');
+// import userValidacao from '../middlewares/userValidation';
+// import userController from '../../app/controllers/userController';
 
-const userValidacao = require('../middlewares/userValidation');
-const userController = require('../../app/controllers/userController');
+// const userRoute = express.Router({ mergeParams: true });
 
-userRoute.post('/', userValidacao.userValidate, userController.create);
+// userRoute.post('/', userValidacao.userValidate, userController.create);
 
-userRoute.use(validateJWT);
-userRoute.get('/', userController.getAll);
-userRoute.get('/:id', userController.getUserId);
-userRoute.delete('/me', userController.apagarUsuario);
+// userRoute.use(validateJWT);
+// userRoute.get('/', userController.getAll);
+// userRoute.get('/:id', userController.getUserId);
+// // userRoute.delete('/me', userController.apagarUsuario);
 
-module.exports = userRoute;
+// export default userRoute;

@@ -7,9 +7,28 @@ const config: Options = {
   host: '127.0.0.1',
   port: 3306,
   dialect: 'mysql',
+  dialectOptions: {
+    timezone: 'Z',
+  },
+  logging: false,
 };
 
-export = config;
+// const config: Options = {
+//   username: process.env.DB_USER || 'root',
+//   password: process.env.DB_PASS || '123456',
+//   database: 'TRYBE_FUTEBOL_CLUBE',
+//   host: process.env.DB_HOST || 'localhost',
+//   port: Number(process.env.DB_PORT) || 3002,
+//   dialect: 'mysql',
+//   dialectOptions: {
+//     timezone: 'Z',
+//   },
+//   logging: false,
+// }
+
+// module.exports = config;
+
+export default config;
 // module.exports = {
 //   development: {
 //     username: process.env.MYSQL_USER,

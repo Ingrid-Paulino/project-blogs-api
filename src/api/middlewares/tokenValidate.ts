@@ -1,14 +1,16 @@
-const { validateError } = require('../../app/utils');
-const Schema = require('../../app/schemas/userSchema');
+// import { NextFunction, Request, Response } from 'express';
+// import { throwError } from '../../app/helpers/thowError';
 
-const tokenValidate = (req, res, next) => {
-      const token = req.headers.authorization;
+// import Schema from '../../app/schemas/userSchema';
 
-      const { error } = Schema.TokenSchema.validate(token);
-    
-      if (error) throw validateError(401, error.details[0].message);
-      
-      next();
-    };
-    
-module.exports = { tokenValidate };
+// const tokenValidate = (req: Request, res: Response, next: NextFunction) => {
+//   const token = req.headers.authorization;
+
+//   const { error } = Schema. TokenSchema.validate(token);
+
+//   if (error) throwError(`${error.details[0].message}/401`);
+
+//   next();
+// };
+
+// export default { tokenValidate };

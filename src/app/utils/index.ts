@@ -1,6 +1,6 @@
-const validateError = (status, message) => ({
-    status,
-    message,
+const statusEmessage = (status: string, message: string) => ({
+  status,
+  message,
 });
 
-module.exports = { validateError };
+export default statusEmessage;

@@ -1,14 +1,14 @@
-const express = require('express');
+import * as express from 'express';
+
+// import categoryRoute from './categoryRouter';
+// import blogPostRoute from './blogPostRouter';
+// import userRouter from './userRouter';
+import loginRoute from './loginRouter';
 
 const route = express.Router({ mergeParams: true });
 
-const userRouter = require('./userRouter');
-const loginRoute = require('./loginRouter');
-const categoryRoute = require('./categoryRouter');
-const blogPostRoute = require('./blogPostRouter');
-
-route.use('/user', userRouter);
+// route.use('/user', userRouter);
 route.use('/login', loginRoute);
-route.use('/categories', categoryRoute);
-route.use('/post', blogPostRoute);
-module.exports = route;
+// route.use('/categories', categoryRoute);
+// route.use('/post', blogPostRoute);
+export default route;

@@ -1,10 +1,9 @@
-const express = require('express');
+import * as express from 'express';
+// import loginValidate from '../middlewares/loginValidate';
+import loginController from '../../app/controllers/loginController';
 
 const loginRoute = express.Router({ mergeParams: true });
 
-const loginValidate = require('../middlewares/loginValidate');
-const loginController = require('../../app/controllers/loginController');
+loginRoute.post('/', loginController.createLogin);
 
-loginRoute.post('/', loginValidate.loginValidate, loginController.create);
-
-module.exports = loginRoute;
+export default loginRoute;
