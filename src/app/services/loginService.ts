@@ -1,19 +1,16 @@
-import { User } from '../../db/models';
-import { validateError } from '../utils';
+import User from '../../db/models/user';
+import Schemas from '../schemas/userSchema';
+import { TLogin } from '../types';
 
-const { createToken } = require('./createToken');
+const createLogin = async (data: TLogin) => {
+  const { email, password } = data;
+  const { error } = Schemas.loginSchema.validate({ email, password });
+  if (error) throw error;
 
-const create = async ({ email, password }) => {
-    const foundUser = await User.findOne({ where: { email } });
+  const existUser = await User.findOne({ where: { email, password } });
 
-    if (!foundUser || foundUser.password !== password) {
-      throw validateError(400, 'Invalid fields'); 
-    }
-    console.log({ foundUser });
-
-    const token = createToken(email);
-
-    return token;
+  if (!existUser) throw new Error('Invalid fields/400');
+  return existUser;
 };
 
-export default { create };
+export default { createLogin };

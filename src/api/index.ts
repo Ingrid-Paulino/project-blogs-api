@@ -1,5 +1,5 @@
-import express from 'express';
-import bodyParse from 'body-parser';
+import * as express from 'express';
+import * as bodyParse from 'body-parser';
 import routes from './routes';
 import error from './middlewares/errorHandler';
 

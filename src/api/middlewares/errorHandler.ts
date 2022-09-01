@@ -1,13 +1,13 @@
 // const errorMiddlewate = (err, _req, res, _next) => {
-//   //  console.error('err', err);
+//   console.error('err', err);
 
 //   if (err.status) {
 //     return res.status(err.status).json({ message: err.message });
 //   }
 
-//   // if ('status' in err) {
-//   //   return res.status(err.status).send({ message: err.message });
-//   // }
+//   if ('status' in err) {
+//     return res.status(err.status).send({ message: err.message });
+//   }
 
 //   return res.status(500).json({
 //     error: {
@@ -27,8 +27,12 @@ const errorHandler = (
   _next: NextFunction,
 ) => {
   const [msg, status, token] = message.split('/');
+  // console.log('msg', msg);
+  // console.log('status', status);
+  
   return res
-    .status(Number(status))
-    .json({ [token ? 'error' : 'message']: msg });
+    .status(Number(status) || 400)
+    // .json({ [token ? 'error' : 'message']: msg });
+    .json({ message: msg });
 };
 export default errorHandler;
