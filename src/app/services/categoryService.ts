@@ -1,18 +1,18 @@
-// import Categorie from '../../db/models/categorie';
+import Categorie from '../../db/models/categorie';
+import Schema from '../schemas/userSchema';
+import { TCategory } from '../types';
 // import { throwError } from '../helpers/thowError';
 
-// const create = async (name: any) => {
-//   if (!name) throwError('"name" is required/400');
+const create = async (name: string) => {
+  const { error } = Schema.categorySchema.validate({ name });
+  if (error) throw error;
+  const categoryCreate: TCategory = await Categorie.create({ name });
+  return categoryCreate;
+};
 
-//   const category = await Categorie.create({ name });
+const getAll = async () => Categorie.findAll({ attributes: { exclude: ['password'] } });
 
-//   console.log('category', category);
-//   return category;
-// };
-
-// const getAll = async () => Categorie.findAll({ attributes: { exclude: ['password'] } });
-
-// export default {
-//   create,
-//   getAll,
-// };
+export default {
+  create,
+  getAll,
+};

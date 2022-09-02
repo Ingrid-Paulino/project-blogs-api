@@ -35,10 +35,12 @@ const userSchema = Joi.object({
   }),
 }).required();
 
-// const LoginSchema = Joi.object({
-//   email: Joi.string().email().required(),
-//   password: Joi.string().length(6).required(),
-// });
+const categorySchema = Joi.object({
+  name: Joi.string().required().messages({
+    'any.required': '"name" is required/400',
+    'string.empty': requireMsg,
+  }),
+}).required();
 
 // const BlogPostSchema = Joi.object({
 //   title: Joi.string().required(),
@@ -54,6 +56,7 @@ const userSchema = Joi.object({
 export default {
   userSchema,
   loginSchema,
+  categorySchema,
 //   BlogPostSchema,
 //   BlogPostSchemaUpdate,
 };
