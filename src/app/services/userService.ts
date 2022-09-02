@@ -1,17 +1,19 @@
-// import User from '../../db/models/user';
-// import { throwError } from '../helpers/thowError';
+import User from '../../db/models/user';
+import Schemas from '../schemas/userSchema';
+import { TUser } from '../types';
 
-// const create = async (reqBodyUser: any) => {
-//   const { email } = reqBodyUser;
+const create = async (reqBodyUser: TUser) => {
+  const { displayName, email, password, image } = reqBodyUser;
 
-//   const emailUser = await User.findOne({ where: { email } });
-//   if (emailUser) throwError('User already registered/409');
-//   console.log('oi', emailUser);
-  
-//   const response = await User.create(reqBodyUser);
+  const { error } = Schemas.userSchema.validate({ displayName, email, password, image });
+  if (error) throw error;
 
-//   return response;
-// };
+  const emailUser = await User.findOne({ where: { email, password } });
+  if (emailUser) throw new Error('User already registered/409');
+
+  const response = await User.create({ displayName, email, password, image });
+  return response;
+};
 
 // const getAll = async () => User.findAll({ 
 //   attributes: { 
@@ -33,4 +35,9 @@
 //   return id;
 // };
 
-// export default { create, getAll, getUserId, apagarUsuario };
+export default {
+  create,
+  // getAll,
+  // getUserId,
+  // apagarUsuario
+};

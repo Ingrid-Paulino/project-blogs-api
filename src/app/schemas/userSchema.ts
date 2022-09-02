@@ -13,12 +13,27 @@ const loginSchema = Joi.object({
   }),
 }).required();
 
-// const UserSchema = Joi.object({
-//   displayName: Joi.string().min(8),
-//   email: Joi.string().email().required(),
-//   password: Joi.string().length(6).required(),
-//   image: Joi.string(),
-// });
+const userSchema = Joi.object({
+  displayName: Joi.string().min(8).required().messages({
+    'any.required': requireMsg,
+    // 'string.empty': requireMsg,
+    'string.min': '"displayName" length must be at least 8 characters long/400',
+  }),
+  email: Joi.string().email().required().messages({
+    'any.required': requireMsg,
+    // 'string.empty': requireMsg,
+    'string.email': '"email" must be a valid email/400',
+  }),
+  password: Joi.string().min(6).required().messages({
+    'any.required': requireMsg,
+    // 'string.empty': requireMsg,
+    'string.min': '"password" length must be at least 6 characters long/400',
+  }),
+  image: Joi.string().required().messages({
+    'any.required': requireMsg,
+    'string.empty': requireMsg,
+  }),
+}).required();
 
 // const LoginSchema = Joi.object({
 //   email: Joi.string().email().required(),
@@ -37,7 +52,7 @@ const loginSchema = Joi.object({
 // });
 
 export default {
-//   UserSchema,
+  userSchema,
   loginSchema,
 //   BlogPostSchema,
 //   BlogPostSchemaUpdate,
