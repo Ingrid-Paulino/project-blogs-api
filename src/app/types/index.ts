@@ -9,3 +9,9 @@ export type TUser = {
   password: string,
   image: string,
 };
+
+export type DecodeData = {
+  data: {
+    email: string,
+  }
+};

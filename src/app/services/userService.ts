@@ -15,11 +15,11 @@ const create = async (reqBodyUser: TUser) => {
   return response;
 };
 
-// const getAll = async () => User.findAll({ 
-//   attributes: { 
-//     exclude: ['password'],
-//   },
-// });
+const getAll = async () => User.findAll({ 
+  attributes: { 
+    exclude: ['password'],
+  },
+});
 
 // const getUserId = async (id: number) => {
 //   const user = await User.findByPk(id, { attributes: { exclude: ['password'] } });
@@ -37,7 +37,7 @@ const create = async (reqBodyUser: TUser) => {
 
 export default {
   create,
-  // getAll,
+  getAll,
   // getUserId,
   // apagarUsuario
 };

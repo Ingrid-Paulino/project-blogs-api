@@ -14,15 +14,15 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-// const getAll = async (req: Request, res: Response, next: NextFunction) => {
-//   try {
-//     const response = await userService.getAll();
+const getAll = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const response = await userService.getAll();
 
-//     return res.status(200).json(response);
-//   } catch (error) {
-//     next(error);
-//   }
-// };
+    return res.status(200).json(response);
+  } catch (error) {
+    next(error);
+  }
+};
 
 // const getUserId = async (req: Request, res: Response, next: NextFunction) => {
 //   try {
@@ -50,7 +50,7 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
 
 export default {
   create,
-//   getAll,
+  getAll,
 //   getUserId,
 //   // apagarUsuario,
 };
