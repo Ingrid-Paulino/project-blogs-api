@@ -1,11 +1,12 @@
 import { NextFunction, Request, Response } from 'express';
 import userService from '../services/userService';
 import createToken from '../services/jwtService';
+import { TUser } from '../types';
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { email } = req.body;
-    const token = createToken(email);
+    const { email } = req.body as TUser;
+    const token: string = createToken(email);
     await userService.create(req.body);
 
     return res.status(201).json({ token });
@@ -16,24 +17,22 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
 
 const getAll = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const response = await userService.getAll();
-
+    const response: TUser[] = await userService.getAll();
     return res.status(200).json(response);
   } catch (error) {
     next(error);
   }
 };
 
-// const getUserId = async (req: Request, res: Response, next: NextFunction) => {
-//   try {
-//     const { id } = req.params;
-//     const response = await userService.getUserId(+id);
-
-//     return res.status(200).json(response);
-//   } catch (error) {
-//     next(error);
-//   }
-// };
+const getUserId = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { id } = req.params;
+    const response: TUser = await userService.getUserId(+id);
+    return res.status(200).json(response);
+  } catch (error) {
+    next(error);
+  }
+};
 
 // // const apagarUsuario = async (req: Request, res: Response, next: NextFunction) => {
 // //   const userId = req.user.id;
@@ -51,6 +50,6 @@ const getAll = async (req: Request, res: Response, next: NextFunction) => {
 export default {
   create,
   getAll,
-//   getUserId,
+  getUserId,
 //   // apagarUsuario,
 };

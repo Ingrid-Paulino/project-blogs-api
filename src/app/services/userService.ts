@@ -21,13 +21,13 @@ const getAll = async () => User.findAll({
   },
 });
 
-// const getUserId = async (id: number) => {
-//   const user = await User.findByPk(id, { attributes: { exclude: ['password'] } });
+const getUserId = async (id: number) => {
+  // const user = await User.findByPk(id);
+  const user = await User.findByPk(id, { attributes: { exclude: ['password'] } });
 
-//   if (!user) throwError('User does not exist/404');
-
-//   return user;
-// };
+  if (!user) throw new Error('User does not exist/404');
+  return user;
+};
 
 // const apagarUsuario = async (id: number) => {
 //   console.log({ id });
@@ -38,6 +38,6 @@ const getAll = async () => User.findAll({
 export default {
   create,
   getAll,
-  // getUserId,
+  getUserId,
   // apagarUsuario
 };
