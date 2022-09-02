@@ -1,0 +1,19 @@
+const path = require("path");
+
+const basePath = path.resolve(__dirname, "sequelize");
+
+module.exports = {
+  // 'blogs_api' ao final é o nome do meu banco
+  // '123456' -> senha do banco
+  // url: process.env.MYSQL_URI || "mysql://root:123456@localhost:3002/blogs_api",
+  // "config": path.resolve(__dirname, "dist", "db", "config", "config.js"),
+  // "models-path": path.resolve(__dirname, "dist", "db", "models", "db_sequelize"),
+  // "seeders-path": path.resolve(basePath, "seeders"),
+  // "migrations-path": path.resolve(basePath, "migrations"),
+
+  url: process.env.MYSQL_URI || 'mysql://root:password@127.0.0.1:3306/blogs_api',
+  'config': path.resolve(__dirname,'build','db','config', 'config.js'),
+  'models-path': path.resolve(__dirname,'build','db','models'),
+  'seeders-path': path.resolve(__dirname,'sequelize', 'seeders'),
+  'migrations-path': path.resolve(__dirname,'sequelize', 'migrations'),
+};
