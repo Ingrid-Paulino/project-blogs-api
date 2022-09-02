@@ -11,6 +11,6 @@ userRoute.post('/', userController.create);
 userRoute.use(validateJWT);
 userRoute.get('/', userController.getAll);
 userRoute.get('/:id', userController.getUserId);
-// // userRoute.delete('/me', userController.apagarUsuario);
+userRoute.delete('/me', userController.apagarUsuario);
 
 export default userRoute;

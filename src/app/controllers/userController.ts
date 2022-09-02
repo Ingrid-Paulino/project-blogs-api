@@ -8,7 +8,6 @@ const create = async (req: Request, res: Response, next: NextFunction) => {
     const { email } = req.body as TUser;
     const token: string = createToken(email);
     await userService.create(req.body);
-
     return res.status(201).json({ token });
   } catch (error) {
     next(error);
@@ -34,22 +33,20 @@ const getUserId = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-// // const apagarUsuario = async (req: Request, res: Response, next: NextFunction) => {
-// //   const userId = req.user.id;
-// //   // console.log({ userId });
+const apagarUsuario = async (req: Request, res: Response, next: NextFunction) => {
+  const userId: string = req.body.user.dataValues.id;
 
-// //   try {
-// //     await userService.apagarUsuario(userId);
-
-// //     return res.status(204).end();
-// //   } catch (error) {
-// //     next(error);
-// //   }
-// // };
+  try {
+    await userService.apagarUsuario(+userId);
+    return res.status(204).end();
+  } catch (error) {
+    next(error);
+  }
+};
 
 export default {
   create,
   getAll,
   getUserId,
-//   // apagarUsuario,
+  apagarUsuario,
 };

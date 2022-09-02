@@ -41,7 +41,8 @@ export default async (req: Request, res: Response, next: NextFunction) => {
 
     // console.log('req', req);
     req.body = { ...req.body, user }; // use assim com ts
-    
+    // console.log('body', req.body);
+
     next();
   } catch (err) {
     return res.status(401).json({ message: 'Expired or invalid token' });

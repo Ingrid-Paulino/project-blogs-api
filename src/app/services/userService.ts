@@ -24,20 +24,18 @@ const getAll = async () => User.findAll({
 const getUserId = async (id: number) => {
   // const user = await User.findByPk(id);
   const user = await User.findByPk(id, { attributes: { exclude: ['password'] } });
-
   if (!user) throw new Error('User does not exist/404');
   return user;
 };
 
-// const apagarUsuario = async (id: number) => {
-//   console.log({ id });
-//   await User.destroy({ where: { id } });
-//   return id;
-// };
+const apagarUsuario = async (id: number) => {
+  await User.destroy({ where: { id } });
+  return id;
+};
 
 export default {
   create,
   getAll,
   getUserId,
-  // apagarUsuario
+  apagarUsuario,
 };
